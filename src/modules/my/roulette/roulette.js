@@ -1,8 +1,8 @@
 import { LightningElement, track, api } from 'lwc';
 
 export default class Roulette extends LightningElement {
-    @api bullets = [{key: 1}, {key: 2}, {key: 3}, {key: 4}, {key: 5}, {key: 6}];
-    selectBullet = false;
+    @api bullets = [1, 2, 3, 4, 5, 6];
+    bulletIsSelected = false;
     bulletFired;
     bulletSelected;
     @track shotsFired = 0;
@@ -17,6 +17,7 @@ export default class Roulette extends LightningElement {
 
     trigger;
     myModal;
+    myblink = null;
 
     pad(n) {
         return (n < 10) ? ("0" + n) : n;
@@ -35,26 +36,25 @@ export default class Roulette extends LightningElement {
         this.sec = 0;
         this.min = 0;
         this.mytime = null;
-        this.selectBullet = false;
+        this.bulletIsSelected = false;
         this.shotsFired = 0;
         this.currentScore = 0;
     }
     
     get allBulletsClass() {
-        let currClass = "sub"
-        if (this.selectBullet) {
-            return currClass + " bullet-disabled";
+        let currClass = "bullets"
+        if (this.bulletIsSelected) {
+            return currClass + " bullets-disabled";
         }
         return currClass;
     }
 
     handleBulletSelected(evt) {
-        //console.log('Current value of the bullet', evt.target, evt.target.textContent);
         this.startTimer();
-        this.selectBullet = true;
+        this.bulletIsSelected = true;
         this.bulletFired = parseInt(evt.target.textContent, 10);
         this.bulletSelected = evt.target;
-        this.bulletSelected.classList.add('slot-selected');
+        this.bulletSelected.classList.add("bullet-selected");
         this.trigger.disabled = false;
     }
 
@@ -63,24 +63,23 @@ export default class Roulette extends LightningElement {
         let selectedBullet = this.bulletSelected;
 
         randomBullet = this.bullets[Math.floor(Math.random() * this.bullets.length)];
-        if (this.selectBullet === true) {
+        if (this.bulletIsSelected === true) {
             this.trigger.disabled = true;
 
             //makes the bullet blinks when it is pulled
-            selectedBullet.classList.add('bullet-fired');
+            selectedBullet.classList.add("bullet-fired");
             setTimeout(function () {
-                selectedBullet.classList.remove('bullet-fired', 'slot-selected');
+                selectedBullet.classList.remove("bullet-fired", "bullet-selected");
             }, 500);
 
 			//checks to see if bullet selected matches a random number in the array
-            if (randomBullet.key !== this.bulletFired) {
+            if (randomBullet !== this.bulletFired) {
                 this.shotsFired += 1;
                 this.currentScore += (this.shotsFired * 5) + 100;
             } else {
                 this.endGame();
             }
-            this.selectBullet = false;
-            //console.log(randomBullet, this.bulletFired, this.currentScore);
+            this.bulletIsSelected = false;
         } else {
             this.trigger.disabled = true;
         }
@@ -105,8 +104,8 @@ export default class Roulette extends LightningElement {
 
     startTimer() {
         if (!this.mytime) {
-            this.trigger = this.template.querySelector('.shoots');
-            this.myModal = this.template.querySelector('.modal');
+            this.trigger = this.template.querySelector(".fire");
+            this.myModal = this.template.querySelector(".modal");
         
             let localThis = this;
             this.mytime = setInterval(function() { localThis.timer(); }, 1000);
@@ -120,33 +119,25 @@ export default class Roulette extends LightningElement {
 
     showModal() {
         this.myModal.style.display = "block";
+        let localThis = this;
+        this.myblink = setInterval(function() { localThis.blinkModal(); }, 200);
+
     }
 
     hideModel() {
         this.myModal.style.display = "none";
+        clearInterval(this.myblink);
+    }
+
+    blinkModal() {
+        this.myModal.classList.toggle("modal-animate");
     }
 }
 
 /*
-
-
-function blinking(){
-   myModal.classList.toggle('animate-modal');
-}
-//Modal functions that pops up when the game ends
 function modal() {
-    var blink = setInterval(blinking, 200);
-    restart.addEventListener('click', function (evt) {
-        if (evt.target.tagName === 'P') {
-            myModal.style.display = "none";
-            location.reload();
-        }
-    });
-
-
     //exit the modal stage when click anywhere
     window.addEventListener('click', modalEvent);
 }
 });
-
 */

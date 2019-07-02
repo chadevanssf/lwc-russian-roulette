@@ -6,11 +6,14 @@
     box-shadow: 10px 10px 10px #ccc;
     padding: 50px 20px;
 }
-.sub {
+/* Bullets */
+.bullets {
     display: flex;
     justify-content: center;
     margin-top: 50px;
-    
+}
+.bullets-disabled {
+    pointer-events: none;
 }
 .bullet {
     display: flex;
@@ -25,20 +28,18 @@
     cursor: pointer;
     margin-right: 10px;
 }
-.bullet-disabled{
-    pointer-events: none;
-}
-.slot-selected{
+.bullet-selected {
     background-color: rgb(29, 26, 26);
 }
-.bullet-fired{
+.bullet-fired {
     background-color: rgb(160, 51, 23);
 }
-.sub-2{
+/* Fire button */
+.commands {
     width: 200px;
     margin: 0 auto;
 }
-.shoots {
+.fire {
     background-color: rgb(160, 51, 23);
     color: whitesmoke;
     padding: 10px 0;
@@ -53,30 +54,11 @@
     width: 200px;
     border: 0;
 }
-.shoots :disabled{
+.fire:disabled {
     color: black;
-    background-color: rgb(160, 51, 23);
+    background-color: rgb(160, 51, 23, 0.4);
 }
-.shot-fired {
-    background-color: #000000;
-    z-index: 1;
-    opacity: 0.5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.restart{
-    font-size: 15px;
-    color: black;
-    background-color: rgb(160, 51, 23);
-    padding: 10px 20px;
-    width: 150px;
-    border-radius: 7px;
-}
-.shot-fired-text {
-    font-size: 75px;
-    color: rgb(160, 51, 23);
-}
+/* Model */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -87,11 +69,11 @@
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  .animate-modal{
-    background-color:rgba(214, 206, 203, 0.4);
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+.modal-animate {
+    background-color: rgba(214, 206, 203, 0.4);
 }
 .modal-content {
     position: relative;
@@ -100,33 +82,42 @@
     padding: 0;
     border: 1px solid #888;
     width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
-    animation-duration: 0.4s
-  }.modal-header {
+    animation-duration: 0.4s;
+}
+.modal-header {
     padding: 2px 16px;
     background-color: rgb(160, 51, 23, 0.2);
     color: white;
-  }
-  
-  .modal-body {padding: 2px 16px;}
-  .modal-footer {
+}
+.modal-body {
+    padding: 2px 16px;
+}
+.modal-footer {
     padding: 2px 16px;
     background-color: rgb(160, 51, 23, 0.2);
     color: white;
-  }
-  .close {
+}
+.close {
     color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+.close:hover,
+.close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-  }
+}
+.restart {
+    font-size: 15px;
+    color: black;
+    background-color: rgb(160, 51, 23);
+    padding: 10px 20px;
+    width: 150px;
+    border-radius: 7px;
+}

@@ -1,4 +1,4 @@
 import { buildCustomElementConstructor } from 'lwc';
-import MyApp from 'my/app';
+import MyRoulette from 'my/roulette';
 
-customElements.define('my-app', buildCustomElementConstructor(MyApp));
+customElements.define('my-roulette', buildCustomElementConstructor(MyRoulette));
