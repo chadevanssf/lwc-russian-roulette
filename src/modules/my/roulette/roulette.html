@@ -1,0 +1,39 @@
+<template>
+    <div class="roulette">
+        <div class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close" onclick={handleNewGame}>&times;</span>
+                    <h2>Game Over</h2>
+                </div>
+                <div class="modal-body">
+                    <h3>
+                        Elapsed time was {time} and your Score was
+                        {currentScore}
+                    </h3>
+                </div>
+                <div class="modal-footer">
+                        <button class="restart" onclick={handleNewGame}>New Game</button>
+                </div>
+            </div>
+        </div>
+        <h1 class="timer">Timer: {time}</h1>
+        <div class={allBulletsClass}>
+            <template for:each={bullets} for:item="bullet">
+                <div
+                    key={bullet.key}
+                    class="bullet"
+                    onclick={handleBulletSelected}
+                >
+                    {bullet.key}
+                </div>
+            </template>
+        </div>
+        <div class="sub-2">
+            <button class="shoots" disabled onclick={handleShoot}>Shoot</button>
+        </div>
+
+        <h1 class="score">Score: {currentScore}</h1>
+        <h1 class="score">Shots: {shotsFired}</h1>
+    </div>
+</template>
