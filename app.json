@@ -1,0 +1,32 @@
+{
+  "name": "lwc-russian-roulette",
+  "description": "Russian Roulette for LWC Open Source, from https://github.com/JohnMadakin/Russian-Roulette",
+  "keywords": [
+    "Heroku",
+    "Salesforce",
+    "LWC",
+    "Lightning Web Components"
+  ],
+  "website": "https://lwc.dev/",
+  "repository": "https://github.com/chadevanssf/lwc-russian-roulette",
+  "env": {
+    "NODE_ENV": {
+      "description": "What environment this app is running in, 'production' has special default meaning to Express",
+      "value": "DEV",
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
